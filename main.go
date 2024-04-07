@@ -65,5 +65,8 @@ func pageHandler(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 	w.Header().Set("Content-Type", "text/html")
-	w.Write(file)
+	_, err = w.Write(file)
+	if err != nil {
+		log.Printf("Error writing response: %v", err)
+	}
 }
