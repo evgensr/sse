@@ -81,12 +81,20 @@ jobs:
           TZ: "America/Chicago"
 
   ci:
-    name: "Run CI"
+    name: "Checks"
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout
+        uses: actions/checkout@v4
         with:
           fetch-depth: 1
-      - uses: WillAbides/setup-go-faster@v1.14.0
+      - name: Setup Go
+        uses: WillAbides/setup-go-faster@v1.14.0
+        with:
+          go-version: 1.21
+      - name: Static Check
+        uses: dominikh/staticcheck-action@v1.3.0
         with:
           version: "latest"
+          min-go-version: 1.21
+          install-go: false
